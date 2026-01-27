@@ -26,6 +26,6 @@
   --color-primary: var(--color-gray-200);
   --color-primary-foreground: #FFFFFF;
 
-  --color-secondary: var(--color-gray-500);
+  --color-secondary: var(--color-brand-dark);
   --color-secondary-foreground: #000000;
 }

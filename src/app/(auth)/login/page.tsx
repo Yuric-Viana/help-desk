@@ -4,13 +4,13 @@ import { Form } from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { SocialAuth } from "@/components/SocialAuth";
 
 export default function LoginPage() {
   return (
     <div className="mx-6 h-screen overflow-y-hidden lg:h-max">
       <div className="rounded-2xl border-2 border-gray-500 p-6">
         <Form
-          subtitle="Ou entre com"
           title="Acesse o portal"
           description="Entre usando seu e-mail e senha cadastrados"
         >
@@ -47,6 +47,7 @@ export default function LoginPage() {
             <Button variant="default">Entrar</Button>
           </Field>
         </Form>
+        <SocialAuth subtitle="Ou entre com" />
         <p className="mt-6 text-center text-sm text-gray-400 italic">
           Ainda não tem uma conta ?{" "}
           <Link className="text-gray-200" href="/register">

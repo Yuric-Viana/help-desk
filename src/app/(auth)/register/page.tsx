@@ -1,4 +1,5 @@
 import { Form } from "@/components/Form";
+import { SocialAuth } from "@/components/SocialAuth";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,6 @@ export default function RegisterPage() {
     <div className="mx-6 pb-35 lg:pb-25">
       <div className="rounded-2xl border-2 border-gray-500 p-6">
         <Form
-          subtitle="Ou cadastre-se com"
           title="Crie sua conta"
           description="Informe seu nome, e-mail e senha"
         >
@@ -63,6 +63,7 @@ export default function RegisterPage() {
             <Button variant="default">Cadastrar</Button>
           </Field>
         </Form>
+        <SocialAuth subtitle="Ou cadastre-se com" />
         <p className="mt-6 text-center text-sm text-gray-400 italic">
           Já tem uma conta ?{" "}
           <Link className="text-gray-200" href="/login">

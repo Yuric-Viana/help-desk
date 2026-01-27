@@ -8,7 +8,7 @@ export function NavLinks() {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
 
   return (
-    <div className="mx-3 grid gap-1 bg-gray-100 px-5 py-4">
+    <div className="mx-3 grid gap-1 rounded-2xl bg-gray-100 px-5 py-4">
       <h3 className="mb-3 text-[10px] font-bold text-gray-400 uppercase">
         Menu
       </h3>

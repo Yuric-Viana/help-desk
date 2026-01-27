@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
+import { ProfileOptions } from "./ProfileOptions";
 
 interface MobileHeaderProps {
   user?: {
@@ -14,8 +15,9 @@ interface MobileHeaderProps {
   };
 }
 
-export function MobileHeader() {
-  const [click, setClick] = useState(false);
+export function MobileHeader({ user }: MobileHeaderProps) {
+  const [clickMenu, setClickMenu] = useState(false);
+  const [clickProfile, setClickProfile] = useState(false);
 
   const name = "Yuri Viana";
   const work = name.split(" ");
@@ -29,7 +31,8 @@ export function MobileHeader() {
             <Button
               size="icon-lg"
               onClick={() => {
-                setClick(click === false ? true : false);
+                setClickMenu(clickMenu === false ? true : false);
+                setClickProfile(false);
               }}
             >
               <MenuIcon />
@@ -54,12 +57,17 @@ export function MobileHeader() {
           type="button"
           variant="ghost"
           className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+          onClick={() => {
+            setClickProfile(clickProfile === false ? true : false);
+            setClickMenu(false);
+          }}
         >
           <p className="text-sm text-gray-600 uppercase">{initials}</p>
         </Button>
       </div>
 
-      {click && <NavLinks />}
+      {clickMenu && <NavLinks />}
+      {clickProfile && <ProfileOptions />}
     </>
   );
 }

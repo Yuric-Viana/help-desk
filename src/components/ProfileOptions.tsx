@@ -1,12 +1,15 @@
 import { cn } from "@/lib/classMerge";
 import { LogOut } from "lucide-react";
 import Image from "next/image";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface ProfileOptionsProps {
   className?: string;
+  onClose: () => void;
 }
 
-export function ProfileOptions({ className }: ProfileOptionsProps) {
+export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
   return (
     <div
       className={cn([
@@ -18,15 +21,23 @@ export function ProfileOptions({ className }: ProfileOptionsProps) {
         Opções
       </h3>
 
-      <div className="flex items-center gap-2">
-        <Image
-          src="/icons/circle-user.svg"
-          alt="Ícone de usuário"
-          width={20}
-          height={20}
-        />
-        <p className="text-app-gray-500 cursor-pointer text-base">Perfil</p>
-      </div>
+      <Button
+        variant="ghost"
+        className="flex w-max items-center gap-2 p-0"
+        onClick={onClose}
+        asChild
+      >
+        <Link href="">
+          <Image
+            src="/icons/circle-user.svg"
+            alt="Ícone de usuário"
+            width={20}
+            height={20}
+          />
+          <p className="text-app-gray-500 cursor-pointer text-base">Perfil</p>
+        </Link>
+      </Button>
+
       <div className="flex items-center gap-2">
         <LogOut size={20} className="text-feedback-danger" />
         <p className="text-feedback-danger cursor-pointer text-base">Sair</p>

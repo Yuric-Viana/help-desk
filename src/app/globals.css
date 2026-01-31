@@ -6,12 +6,13 @@
   --color-brand-base: #5165E1;
   --color-brand-light: #8996EB;
 
-  --color-gray-100: #151619;
-  --color-gray-200: #1E2024;
-  --color-gray-300: #535964;
-  --color-gray-400: #858B99;
-  --color-gray-500: #E3E5E8;
-  --color-gray-600: #F9FAFA;
+  --color-app-gray-100: #151619;
+  --color-app-gray-200: #1E2024;
+  --color-app-gray-300: #535964;
+  --color-app-gray-400: #858B99;
+  --color-app-gray-500: #E3E5E8;
+  --color-app-gray-600: #F9FAFA;
+  --color-app-blue-100: #1E2024;
 
   --color-feedback-danger: #D03E3E;
   --color-feedback-open: #CC3D6A;
@@ -23,7 +24,7 @@
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 
-  --color-primary: var(--color-gray-200);
+  --color-primary: var(--color-app-gray-200);
   --color-primary-foreground: #FFFFFF;
 
   --color-secondary: var(--color-brand-dark);

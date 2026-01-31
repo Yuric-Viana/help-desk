@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         alt="Imagem de fundo"
         className="object-cover"
       />
-      <div className="relative overflow-y-hidden rounded-t-2xl bg-gray-600 lg:col-start-2 lg:overflow-y-auto [&::-webkit-scrollbar]:hidden">
+      <div className="bg-app-gray-600 relative overflow-y-hidden rounded-t-2xl lg:col-start-2 lg:overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <div className="flex items-center justify-center gap-3 py-6 pt-8">
           <Image
             src="/Logo_IconDark.svg"

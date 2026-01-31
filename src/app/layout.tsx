@@ -1,6 +1,8 @@
 import { Lato } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import AuthProvider from "@/providers/auth";
+import { Toaster } from "sonner";
 
 const lato = Lato({
   subsets: ["latin", "latin-ext"],
@@ -19,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased`}>{children}</body>
+      <body className={`${lato.variable} antialiased`}>
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
+      </body>
     </html>
   );
 }

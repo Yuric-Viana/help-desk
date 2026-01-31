@@ -3,10 +3,10 @@
 import { MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
 
-import Image from "next/image";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
 import { ProfileOptions } from "./ProfileOptions";
+import { AppHeader } from "./AppHeader";
 
 interface MobileHeaderProps {
   user?: {
@@ -38,22 +38,7 @@ export function MobileHeader({ user }: MobileHeaderProps) {
               <MenuIcon />
             </Button>
           </div>
-          <div className="flex items-center gap-3">
-            <Image
-              src="/Logo_IconLight.svg"
-              alt="Logo help desk"
-              width={44}
-              height={44}
-            />
-            <div>
-              <h2 className="text-app-gray-600 text-[20px] font-bold">
-                HelpDesk
-              </h2>
-              <p className="text-brand-light text-[10px] font-bold uppercase">
-                Admin
-              </p>
-            </div>
-          </div>
+          <AppHeader />
         </div>
         <Button
           type="button"
@@ -68,8 +53,12 @@ export function MobileHeader({ user }: MobileHeaderProps) {
         </Button>
       </div>
 
-      {clickMenu && <NavLinks />}
-      {clickProfile && <ProfileOptions />}
+      {clickMenu && (
+        <div className="bg-app-gray-100 mx-3 grid gap-1 rounded-2xl px-5 py-4">
+          <NavLinks title="Menu" onClose={() => setClickMenu(false)} />
+        </div>
+      )}
+      {clickProfile && <ProfileOptions onClose={() => setClickProfile} />}
     </>
   );
 }

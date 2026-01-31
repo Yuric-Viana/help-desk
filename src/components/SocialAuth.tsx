@@ -1,43 +1,53 @@
+import { signIn } from "next-auth/react";
 import { Avatar, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
 interface SocialAuthProps {
   subtitle: string;
 }
 
 export function SocialAuth({ subtitle }: SocialAuthProps) {
+  const handeLoginWithGoogle = async () => {
+    await signIn("google", {
+      callbackUrl: "/tickets",
+    });
+  };
+
+  const handeLoginWithGithub = async () => {
+    await signIn("github", {
+      callbackUrl: "/tickets",
+    });
+  };
+
   return (
     <>
       <div className="my-6 flex items-center gap-4">
-        <div className="flex-1 border-t border-gray-400" />
-        <span className="text-sm whitespace-nowrap text-gray-400">
+        <div className="border-app-gray-400 flex-1 border-t" />
+        <span className="text-app-gray-400 text-sm whitespace-nowrap">
           {subtitle}
         </span>
-        <div className="flex-1 border-t border-gray-400" />
+        <div className="border-app-gray-400 flex-1 border-t" />
       </div>
 
       <div className="flex justify-center gap-4">
-        <Avatar>
-          <AvatarImage
-            className="cursor-pointer"
-            alt="Ícone do google"
-            src="/google.svg"
-          />
-        </Avatar>
-        <Avatar>
-          <AvatarImage
-            className="cursor-pointer"
-            alt="Ícone do github"
-            src="/github.svg"
-          />
-        </Avatar>
-        <Avatar>
-          <AvatarImage
-            className="cursor-pointer"
-            alt="Ícone do linkedin"
-            src="/linkedin.svg"
-            sizes=""
-          />
-        </Avatar>
+        <Button variant="ghost" className="p-0" onClick={handeLoginWithGoogle}>
+          <Avatar>
+            <AvatarImage
+              className="cursor-pointer"
+              alt="Ícone do google"
+              src="/google.svg"
+            />
+          </Avatar>
+        </Button>
+        <Button variant="ghost" className="p-0" onClick={handeLoginWithGithub}>
+          <Avatar>
+            <AvatarImage
+              className="cursor-pointer"
+              alt="Ícone do github"
+              src="/github.svg"
+            />
+          </Avatar>
+        </Button>
       </div>
     </>
   );

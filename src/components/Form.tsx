@@ -6,22 +6,24 @@ import {
   FieldSet,
 } from "./ui/field";
 
-interface FormProps {
+type FormProps = React.ComponentProps<"form"> & {
   title: string;
   description: string;
   children: ReactNode;
-}
+};
 
-export function Form({ title, children, description }: FormProps) {
+export function Form({ title, children, description, ...rest }: FormProps) {
   return (
-    <FieldSet>
-      <FieldLegend className="text-[20px] font-bold text-gray-200">
-        {title}
-      </FieldLegend>
-      <FieldDescription className="text-xs text-gray-300">
-        {description}
-      </FieldDescription>
-      <FieldGroup>{children}</FieldGroup>
-    </FieldSet>
+    <form {...rest}>
+      <FieldSet>
+        <FieldLegend className="text-app-gray-200 text-[20px] font-bold">
+          {title}
+        </FieldLegend>
+        <FieldDescription className="text-app-gray-300 text-xs">
+          {description}
+        </FieldDescription>
+        <FieldGroup>{children}</FieldGroup>
+      </FieldSet>
+    </form>
   );
 }

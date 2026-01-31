@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-full bg-gray-100">
+    <div className="bg-app-gray-100 min-h-screen w-full">
       <MobileHeader />
       {children}
     </div>

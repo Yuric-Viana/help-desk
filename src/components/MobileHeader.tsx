@@ -46,7 +46,9 @@ export function MobileHeader({ user }: MobileHeaderProps) {
               height={44}
             />
             <div>
-              <h2 className="text-[20px] font-bold text-gray-600">HelpDesk</h2>
+              <h2 className="text-app-gray-600 text-[20px] font-bold">
+                HelpDesk
+              </h2>
               <p className="text-brand-light text-[10px] font-bold uppercase">
                 Admin
               </p>
@@ -62,7 +64,7 @@ export function MobileHeader({ user }: MobileHeaderProps) {
             setClickMenu(false);
           }}
         >
-          <p className="text-sm text-gray-600 uppercase">{initials}</p>
+          <p className="text-app-gray-600 text-sm uppercase">{initials}</p>
         </Button>
       </div>
 

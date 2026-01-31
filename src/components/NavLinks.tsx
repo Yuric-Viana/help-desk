@@ -1,18 +1,33 @@
+"use client";
+
 import { menuListByRole } from "@/lib/utils/menuListByRole";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { act, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/classMerge";
 import Link from "next/link";
 
-export function NavLinks() {
+interface NavLinkProps {
+  onClose?: () => void;
+  title?: string;
+}
+
+export function NavLinks({ onClose, title }: NavLinkProps) {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
 
+  const handleClick = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="bg-app-gray-100 mx-3 grid gap-1 rounded-2xl px-5 py-4">
-      <h3 className="text-app-gray-400 mb-3 text-[10px] font-bold uppercase">
-        Menu
-      </h3>
+    <>
+      {title && (
+        <h3 className="text-app-gray-400 mb-3 text-[10px] font-bold uppercase">
+          {title}
+        </h3>
+      )}
       {menuListByRole["admin"].map((user) => (
         <Button
           className={cn([
@@ -25,6 +40,7 @@ export function NavLinks() {
           key={user.label}
           onClick={() => {
             setActiveLabel(user.label);
+            handleClick();
           }}
           asChild
         >
@@ -39,6 +55,6 @@ export function NavLinks() {
           </Link>
         </Button>
       ))}
-    </div>
+    </>
   );
 }

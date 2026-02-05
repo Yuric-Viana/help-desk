@@ -9,13 +9,13 @@ interface SocialAuthProps {
 export function SocialAuth({ subtitle }: SocialAuthProps) {
   const handeLoginWithGoogle = async () => {
     await signIn("google", {
-      callbackUrl: "/tickets",
+      callbackUrl: "/admin/tickets",
     });
   };
 
   const handeLoginWithGithub = async () => {
     await signIn("github", {
-      callbackUrl: "/tickets",
+      callbackUrl: "/admin/tickets",
     });
   };
 

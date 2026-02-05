@@ -1,6 +1,11 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 
 export function AppFooter() {
+  const { data } = useSession();
+
   const name = "Yuri Viana";
   const work = name.split(" ");
   const initials = work.map((letter) => letter.charAt(0).toUpperCase());
@@ -16,8 +21,8 @@ export function AppFooter() {
       </Button>
 
       <div>
-        <h2 className="text-app-gray-600 text-sm">Usuário Adm</h2>
-        <p className="text-app-gray-400 text-xs">user.adm@test.com</p>
+        <h2 className="text-app-gray-600 text-sm">{data?.user.name}</h2>
+        <p className="text-app-gray-400 text-xs">{data?.user.email}</p>
       </div>
     </div>
   );

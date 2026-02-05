@@ -19,9 +19,11 @@ export function useLogin() {
         return;
       }
 
-      router.replace("/tickets");
+      router.replace("/admin/tickets");
       router.refresh();
     } catch (error) {
+      console.log(error);
+
       toast.error("Erro ao tentar fazer login. Tente novamente mais tarde.");
     }
   }

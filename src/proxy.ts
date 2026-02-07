@@ -35,6 +35,8 @@ export async function proxy(request: NextRequest) {
   if (!allowedRoles.includes(userRole as string)) {
     return NextResponse.redirect(new URL("/", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

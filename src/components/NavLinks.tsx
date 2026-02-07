@@ -1,6 +1,6 @@
 "use client";
 
-import { menuListByRole } from "@/lib/utils/menuListByRole";
+import { menuListByRole } from "@/utils/menuListByRole";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { useState } from "react";

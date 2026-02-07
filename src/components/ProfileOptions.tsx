@@ -3,6 +3,7 @@ import { LogOut } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useLogout } from "@/hooks/useLogout";
 
 interface ProfileOptionsProps {
   className?: string;
@@ -10,6 +11,8 @@ interface ProfileOptionsProps {
 }
 
 export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
+  const { logoutAction } = useLogout();
+
   return (
     <div
       className={cn([
@@ -38,10 +41,15 @@ export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
         </Link>
       </Button>
 
-      <div className="flex items-center gap-2">
+      <Button
+        className="ml-3 flex items-center gap-2"
+        size="icon"
+        onClick={logoutAction}
+        variant="ghost"
+      >
         <LogOut size={20} className="text-feedback-danger" />
         <p className="text-feedback-danger cursor-pointer text-base">Sair</p>
-      </div>
+      </Button>
     </div>
   );
 }

@@ -1,14 +1,24 @@
 import { MobileHeader } from "@/components/MobileHeader";
 import { Sidebar } from "@/components/Sidebar";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import { ReactNode } from "react";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user.name) return;
+
   return (
-    <div className="bg-app-gray-100 min-h-screen w-full lg:grid lg:grid-cols-[200px_1fr]">
+    <div className="bg-app-gray-100 grid min-h-screen w-full grid-rows-[100px_1fr] lg:grid lg:grid-cols-[245px_1fr] lg:grid-rows-1">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <MobileHeader />
+      <MobileHeader user={{ name: session.user.name }} />
       <main className="bg-app-gray-600 mt-3 rounded-t-2xl">{children}</main>
     </div>
   );

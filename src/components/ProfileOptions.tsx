@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useLogout } from "@/hooks/useLogout";
-import { checkPermission } from "@/lib/permissions";
+import { useProfile } from "@/hooks/useProfile";
 
 interface ProfileOptionsProps {
   className?: string;
@@ -13,6 +13,7 @@ interface ProfileOptionsProps {
 
 export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
   const { logoutAction } = useLogout();
+  const { hasRole } = useProfile();
 
   return (
     <div
@@ -25,22 +26,24 @@ export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
         Opções
       </h3>
 
-      <Button
-        variant="ghost"
-        className="flex w-max items-center gap-2 p-0"
-        onClick={onClose}
-        asChild
-      >
-        <Link href="">
-          <Image
-            src="/icons/circle-user.svg"
-            alt="Ícone de usuário"
-            width={20}
-            height={20}
-          />
-          <p className="text-app-gray-500 cursor-pointer text-base">Perfil</p>
-        </Link>
-      </Button>
+      {!hasRole("admin") && (
+        <Button
+          variant="ghost"
+          className="flex w-max items-center gap-2 p-0"
+          onClick={onClose}
+          asChild
+        >
+          <Link href="">
+            <Image
+              src="/icons/circle-user.svg"
+              alt="Ícone de usuário"
+              width={20}
+              height={20}
+            />
+            <p className="text-app-gray-500 cursor-pointer text-base">Perfil</p>
+          </Link>
+        </Button>
+      )}
 
       <Button
         className="ml-3 flex items-center gap-2"

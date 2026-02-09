@@ -7,9 +7,10 @@ interface AppFooterProps {
   user: {
     name: string;
   };
+  onClick?: () => void;
 }
 
-export function AppFooter({ user }: AppFooterProps) {
+export function AppFooter({ user, onClick }: AppFooterProps) {
   const { data } = useSession();
 
   const work = user.name.split(" ");
@@ -20,6 +21,7 @@ export function AppFooter({ user }: AppFooterProps) {
       <Button
         type="button"
         variant="ghost"
+        onClick={onClick}
         className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
       >
         <p className="text-app-gray-600 text-sm uppercase">{initials}</p>

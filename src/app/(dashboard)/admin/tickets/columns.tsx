@@ -8,6 +8,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { statusMap } from "@/utils/status";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type UserSimple = {
   id: string;
@@ -182,16 +183,18 @@ export const columns: ColumnDef<TicketRow>[] = [
         <Button
           className="bg-app-gray-500 h-7 w-7 rounded-lg p-2"
           variant="ghost"
+          asChild
         >
-          {/* <Link>
-
-            </Link> */}
-          <Image
-            src="/icons/pen-line.svg"
-            alt="Ícone de lápis"
-            width={14}
-            height={14}
-          />
+          <Link
+            href={`tickets/ticket-details/${(row.original as TicketRow).id}`}
+          >
+            <Image
+              src="/icons/pen-line.svg"
+              alt="Ícone de lápis"
+              width={14}
+              height={14}
+            />
+          </Link>
         </Button>
       );
     },

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useLogout } from "@/hooks/useLogout";
+import { checkPermission } from "@/lib/permissions";
 
 interface ProfileOptionsProps {
   className?: string;

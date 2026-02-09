@@ -6,7 +6,7 @@ interface GetTicketsParams {
   ticketId: number;
 }
 
-export const GetTicket = async ({ ticketId }: GetTicketsParams) => {
+export const GetTicketUnique = async ({ ticketId }: GetTicketsParams) => {
   return await prisma.ticket.findUnique({
     where: {
       id: ticketId,

@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
+import { InitialsAvatar } from "./InitialsAvatar";
 
 interface AppFooterProps {
   onClick?: () => void;
@@ -10,10 +11,7 @@ interface AppFooterProps {
 export function AppFooter({ onClick }: AppFooterProps) {
   const { data } = useSession();
 
-  if (!data?.user) return;
-
-  const work = (data?.user.name as string).split(" ");
-  const initials = work.map((letter) => letter.charAt(0).toUpperCase());
+  if (!data?.user.name) return;
 
   return (
     <div className="flex gap-3 px-4 py-5">
@@ -23,7 +21,7 @@ export function AppFooter({ onClick }: AppFooterProps) {
         onClick={onClick}
         className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
       >
-        <p className="text-app-gray-600 text-sm uppercase">{initials}</p>
+        {<InitialsAvatar name={data.user.name} />}
       </Button>
 
       <div>

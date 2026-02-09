@@ -4,6 +4,7 @@ import { statusMap } from "@/utils/status";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Image from "next/image";
+import { InitialsAvatar } from "./InitialsAvatar";
 
 interface TicketInfoCardProps {
   data: Prisma.TicketGetPayload<{
@@ -39,10 +40,6 @@ export function TicketInfoCard({ data, className }: TicketInfoCardProps) {
   const updatedAt = format(data.updatedAt as Date, "dd/MM/yy HH:mm", {
     locale: ptBR,
   });
-
-  const initials = data.client.name
-    .split(" ")
-    .map((letter) => letter.charAt(0).toUpperCase());
 
   return (
     <div
@@ -105,9 +102,14 @@ export function TicketInfoCard({ data, className }: TicketInfoCardProps) {
       <div>
         <small className="text-app-gray-400 text-xs font-bold">Cliente</small>
         <div className="text-app-gray-600 mt-2 flex items-center gap-2">
-          <p className="bg-brand-dark flex h-5 w-5 items-center justify-center rounded-full text-[8.75px]">
-            {initials}{" "}
-          </p>
+          <div className="bg-brand-dark flex h-5 w-5 items-center justify-center rounded-full">
+            {
+              <InitialsAvatar
+                className="text-[8.75px]"
+                name={data.client.name}
+              />
+            }{" "}
+          </div>
           <h3 className="text-app-gray-200 text-sm">{data.client.name}</h3>
         </div>
       </div>

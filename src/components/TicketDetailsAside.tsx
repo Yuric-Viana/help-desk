@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { InitialsAvatar } from "./InitialsAvatar";
 
 interface TicketDetailsAsideParams {
   ticketId: number;
@@ -23,19 +24,15 @@ export async function TicketDetailsAside({
 
   if (!ticket) return;
 
-  const initials = ticket.technician.name
-    .split(" ")
-    .map((letter) => letter.charAt(0).toUpperCase());
-
   return (
     <div className="border-app-gray-500 rounded-lg border p-5 lg:col-span-2 lg:col-start-4 lg:grid lg:min-h-77 lg:self-start">
       <small className="text-app-gray-400 text-xs font-bold">
         Técnico responsável
       </small>
       <div className="text-app-gray-600 mt-2 mb-8 flex items-center gap-2 lg:mt-0">
-        <p className="bg-brand-dark flex h-8 w-8 items-center justify-center rounded-full text-sm">
-          {initials}{" "}
-        </p>
+        <div className="bg-brand-dark flex h-8 w-8 items-center justify-center rounded-full text-sm">
+          {<InitialsAvatar name={ticket.technician.name} />}{" "}
+        </div>
         <div>
           <h3 className="text-app-gray-200 text-sm">
             {ticket.technician.name}

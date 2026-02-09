@@ -8,19 +8,17 @@ import { ProfileOptions } from "./ProfileOptions";
 import { AppHeader } from "./AppHeader";
 import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { useRef } from "react";
-interface MobileHeaderProps {
-  user: {
-    name: string;
-  };
-}
+import { useSession } from "next-auth/react";
+import { InitialsAvatar } from "./InitialsAvatar";
 
-export function MobileHeader({ user }: MobileHeaderProps) {
-  const name = user.name.split(" ");
-  const initials = name.map((letter) => letter.charAt(0).toUpperCase());
+export function MobileHeader() {
+  const { data: session } = useSession();
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const data = useToggleMenu(menuRef);
+
+  if (!session?.user.name) return;
 
   return (
     <div className="relative z-50 lg:hidden">
@@ -39,7 +37,7 @@ export function MobileHeader({ user }: MobileHeaderProps) {
           className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
           onClick={data.openProfile}
         >
-          <p className="text-app-gray-600 text-sm uppercase">{initials}</p>
+          {<InitialsAvatar name={session.user.name} />}
         </Button>
       </div>
 

@@ -10,7 +10,7 @@ export const menuListByRole = {
       label: "Técnicos",
       icon: "/icons/users-default.svg",
       iconHover: "/icons/users-hover.svg",
-      path: "/admin/users/technicians",
+      path: "/admin/users/technician",
     },
     {
       label: "Clientes",

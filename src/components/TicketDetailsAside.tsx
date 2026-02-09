@@ -85,7 +85,7 @@ export async function TicketDetailsAside({
       )}
 
       <div className="border-app-gray-500 mt-4 flex items-center justify-between border-t">
-        <h4 className="text-app-gray-200 text-sm font-bold">Total</h4>
+        <h4 className="text-app-gray-200 pt-4 text-sm font-bold">Total</h4>
         <p className="text-app-gray-200 text-sm font-bold">
           {Intl.NumberFormat("pt-BR", {
             style: "currency",

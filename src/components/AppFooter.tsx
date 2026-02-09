@@ -4,16 +4,15 @@ import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 
 interface AppFooterProps {
-  user: {
-    name: string;
-  };
   onClick?: () => void;
 }
 
-export function AppFooter({ user, onClick }: AppFooterProps) {
+export function AppFooter({ onClick }: AppFooterProps) {
   const { data } = useSession();
 
-  const work = user.name.split(" ");
+  if (!data?.user) return;
+
+  const work = (data?.user.name as string).split(" ");
   const initials = work.map((letter) => letter.charAt(0).toUpperCase());
 
   return (

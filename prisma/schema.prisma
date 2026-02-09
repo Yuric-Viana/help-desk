@@ -89,7 +89,7 @@ model Ticket {
   status TicketStatus @default(open)
 
   client     User @relation("ClientTickets", fields: [clientId], references: [id], onDelete: Cascade)
-  technician User @relation("TechnicianTickets", fields: [technicianId], references: [id], onDelete: Cascade)
+  technician User @relation("TechnicianTickets", fields: [technicianId], references: [id])
 
   ticketServices TicketService[]
 

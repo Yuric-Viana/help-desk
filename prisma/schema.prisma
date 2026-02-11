@@ -53,7 +53,7 @@ model User {
 model TechnicianAvailability {
   id           String @id @default(uuid())
   technicianId String @map("technician_id")
-  time         String
+  schedules         String[]
 
   technician User @relation(fields: [technicianId], references: [id])
 

@@ -7,6 +7,22 @@ import { prisma } from "@/lib/prisma";
 
 async function main() {
   /* ============================
+   * LIMPEZA DO BANCO (RESET)
+   * ============================ */
+  console.log("🗑️ Limpando banco de dados...");
+
+  // A ordem importa por causa das chaves estrangeiras (delete os filhos antes dos pais)
+  await prisma.technicianAvailability.deleteMany(); // Apaga horários
+  await prisma.ticketService.deleteMany(); // Apaga serviços dos tickets
+  await prisma.ticket.deleteMany(); // Apaga tickets
+  await prisma.service.deleteMany(); // Apaga serviços
+  await prisma.account.deleteMany(); // Apaga contas vinculadas
+  await prisma.session.deleteMany(); // Apaga sessões
+  await prisma.user.deleteMany(); // Por fim, apaga os usuários
+
+  console.log("✅ Banco limpo! Iniciando criação...");
+
+  /* ============================
    * USUÁRIOS EXISTENTES
    * ============================ */
   const admin = await prisma.user.create({
@@ -584,6 +600,75 @@ async function main() {
       },
     },
   });
+
+  /* ============================
+   * DISPONIBILIDADE DOS TÉCNICOS (REVEZAMENTO)
+   * ============================ */
+
+  // Definição dos 3 turnos solicitados
+  const shift1 = [
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00", // Manhã (08h às 12h)
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00", // Tarde (14h às 18h)
+  ];
+
+  const shift2 = [
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00", // Intermediário 1 (10h às 14h)
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00", // Intermediário 2 (16h às 20h)
+  ];
+
+  const shift3 = [
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00", // Tarde (12h às 16h)
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00", // Noite (18h às 22h)
+  ];
+
+  // Array contendo os 3 tipos de horários para fácil acesso
+  const shifts = [shift1, shift2, shift3];
+
+  // Lista de todos os técnicos criados
+  const allTechnicians = [
+    technicianCarlos, // index 0
+    technicianAna, // index 1
+    userNew2, // index 2 (Fernanda)
+    userNew3, // index 3 (Ricardo)
+  ];
+
+  // Loop para criar disponibilidades alternando os horários
+  for (let i = 0; i < allTechnicians.length; i++) {
+    const tech = allTechnicians[i];
+
+    // O operador % (módulo) garante que o índice sempre fique entre 0, 1 e 2
+    // Se tivermos 4 técnicos, o índice será: 0, 1, 2, 0...
+    const assignedShift = shifts[i % shifts.length];
+
+    await prisma.technicianAvailability.create({
+      data: {
+        technicianId: tech.id,
+        schedules: assignedShift,
+      },
+    });
+
+    console.log(
+      `Disponibilidade criada para ${tech.name} (Turno ${(i % 3) + 1})`,
+    );
+  }
 
   console.log("🌱 Seed executado com sucesso!");
 }

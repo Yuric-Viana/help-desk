@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/classMerge";
 
 interface BackBottomProps {
-  className: string;
+  className?: string;
 }
 
 export function BackBottom({ className }: BackBottomProps) {

@@ -21,7 +21,7 @@ export function MobileHeader() {
   if (!session?.user.name) return;
 
   return (
-    <div className="relative z-50 lg:hidden">
+    <div className="relative z-50 lg:hidden" ref={menuRef}>
       <div className="flex justify-between p-6 lg:hidden">
         <div className="flex items-center gap-4">
           <div>
@@ -42,15 +42,12 @@ export function MobileHeader() {
       </div>
 
       {data.clickMenu && (
-        <div
-          ref={menuRef}
-          className="bg-app-gray-100 mx-3 mt-6 grid h-max gap-1 rounded-2xl px-5 py-4"
-        >
+        <div className="bg-app-gray-100 mx-3 mt-6 grid h-max gap-1 rounded-2xl px-5 py-4">
           <NavLinks title="Menu" onClose={() => data.closeMenu()} />
         </div>
       )}
       {data.clickProfile && (
-        <div ref={menuRef} className="mt-6">
+        <div className="mt-6">
           <ProfileOptions onClose={() => data.closeProfile} />
         </div>
       )}

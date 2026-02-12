@@ -30,7 +30,6 @@ export default function RegisterPage() {
           title="Crie sua conta"
           description="Informe seu nome, e-mail e senha"
           onSubmit={handleSubmit(registerUser)}
-          className=""
         >
           <Field>
             <FieldLabel

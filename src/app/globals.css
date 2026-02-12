@@ -29,4 +29,7 @@
 
   --color-secondary: var(--color-brand-dark);
   --color-secondary-foreground: #000000;
+
+  --color-outline: var(--color-app-gray-500);
+  --color-outline-foreground: #000000;
 }

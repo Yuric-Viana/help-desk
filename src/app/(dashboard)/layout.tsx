@@ -18,7 +18,7 @@ export default async function DashboardLayout({
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-      <MobileHeader user={{ name: session.user.name }} />
+      <MobileHeader />
       <main className="bg-app-gray-600 mt-3 rounded-t-2xl">{children}</main>
     </div>
   );

@@ -4,10 +4,12 @@ import { ReactNode } from "react";
 import { Button } from "./ui/button";
 import { PlusIcon } from "lucide-react";
 import { useIsRoute } from "@/hooks/useIsRoute";
+import Link from "next/link";
 
 interface UsersProps {
   children: ReactNode;
   title: string;
+  id?: string;
 }
 
 export function Users({ title, children }: UsersProps) {
@@ -18,10 +20,12 @@ export function Users({ title, children }: UsersProps) {
       <div className="flex items-center justify-between">
         <h1 className="text-brand-dark text-xl font-bold">{title}</h1>
         {isAdmin && (
-          <Button>
-            <PlusIcon />
-            Novo
-          </Button>
+          <Link href="/admin/users/technicians/technician-profile">
+            <Button>
+              <PlusIcon />
+              <p className="hidden md:block">Novo</p>
+            </Button>
+          </Link>
         )}
       </div>
 

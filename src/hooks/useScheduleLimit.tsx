@@ -11,7 +11,7 @@ export function useScheduleLimit() {
 
     const update = () => {
       if (lg.matches) {
-        setLimit(10);
+        setLimit(15);
       } else if (md.matches) {
         setLimit(6);
       } else if (sm.matches) {

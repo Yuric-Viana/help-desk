@@ -51,9 +51,9 @@ model User {
 }
 
 model TechnicianAvailability {
-  id           String @id @default(uuid())
-  technicianId String @map("technician_id")
-  schedules         String[]
+  id           String   @id @default(uuid())
+  technicianId String   @map("technician_id")
+  schedules    String[]
 
   technician User @relation(fields: [technicianId], references: [id])
 
@@ -118,16 +118,16 @@ model TicketService {
 }
 
 model Account {
-  userId            String   @map("user_id")
+  userId            String  @map("user_id")
   type              String
   provider          String
-  providerAccountId String   @map("provider_account_id")
-  refresh_token     String?  @db.Text 
-  access_token      String?  @db.Text 
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?  @db.Text 
+  id_token          String? @db.Text
   session_state     String?
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -136,7 +136,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
-  @@map("accounts") 
+  @@map("accounts")
 }
 
 model Session {
@@ -148,7 +148,7 @@ model Session {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("sessions") 
+  @@map("sessions")
 }
 
 model VerificationToken {

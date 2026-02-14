@@ -10,7 +10,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import { DeleteUser } from "./DeleteUser";
 import Link from "next/link";
-import { useTechnicianDetails } from "@/hooks/useTechnicianDetails";
+import { PopupClient } from "./PopupClient";
 
 export type Users = {
   id: string;
@@ -93,21 +93,11 @@ export function UsersTable({ data }: UsersTableProps) {
           <div className="flex justify-end gap-2">
             <DeleteUser userId={row.original.id} name={row.original.name} />
             {isClient ? (
-              <Button
-                size="icon-sm"
-                variant="ghost"
-                className="bg-app-gray-500"
-                asChild
-              >
-                <Link href="/admin/users/clients">
-                  <Image
-                    src="/icons/pen-line.svg"
-                    alt="Ícone de lápis"
-                    width={14}
-                    height={14}
-                  />
-                </Link>
-              </Button>
+              <PopupClient
+                name={row.original.name}
+                email={row.original.email}
+                userId={row.original.id}
+              />
             ) : (
               <Button
                 size="icon-sm"

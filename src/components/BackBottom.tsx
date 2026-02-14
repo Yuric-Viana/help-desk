@@ -15,6 +15,7 @@ export function BackBottom({ className }: BackBottomProps) {
   return (
     <Button
       variant="ghost"
+      type="button"
       className={cn(["text-app-gray-300 font-bold", className])}
       onClick={() => router.back()}
     >

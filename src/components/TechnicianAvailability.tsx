@@ -9,8 +9,14 @@ import {
   FieldSet,
 } from "./ui/field";
 import { TimeSlots } from "./TimeSlots";
+import { useFormContext } from "react-hook-form";
+import { NewTechnicianFormData } from "@/schemas/new-technician";
 
 export function TechnicianAvailability() {
+  const {
+    formState: { errors },
+  } = useFormContext<NewTechnicianFormData>();
+
   return (
     <div className="border-app-gray-500 rounded-2xl border p-5 lg:col-span-3 lg:col-start-3 lg:grid lg:h-fit">
       <FieldSet>
@@ -20,6 +26,11 @@ export function TechnicianAvailability() {
         <FieldDescription className="text-app-gray-300 text-xs">
           Selecione os horários de disponibilidade do técnico para atendimento
         </FieldDescription>
+        {errors.availabilities && (
+          <span className="text-xs text-red-500">
+            {errors.availabilities.message}
+          </span>
+        )}
         <FieldGroup>
           <Field>
             <FieldLabel className="text-app-gray-300 text-sm font-bold">

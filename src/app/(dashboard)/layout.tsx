@@ -19,7 +19,9 @@ export default async function DashboardLayout({
         <Sidebar />
       </div>
       <MobileHeader />
-      <main className="bg-app-gray-600 mt-3 rounded-t-2xl">{children}</main>
+      <main className="bg-app-gray-600 min-w-0 rounded-t-2xl px-6">
+        {children}
+      </main>
     </div>
   );
 }

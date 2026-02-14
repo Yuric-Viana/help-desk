@@ -15,6 +15,12 @@ export async function proxy(request: NextRequest) {
 
   const matchingRoute = findMatchingRoute(currentPath);
 
+  if (token && currentPath === "/") {
+    if (userRole === "admin") {
+      return NextResponse.redirect(new URL("/admin/tickets", request.url));
+    }
+  }
+
   if (!matchingRoute) {
     return NextResponse.next();
   }

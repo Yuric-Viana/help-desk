@@ -81,7 +81,7 @@ export function TechnicianPersonalData() {
                 Senha
               </FieldLabel>
               <Input
-                id="email"
+                id="password"
                 autoComplete="off"
                 {...register("password")}
                 placeholder="Defina a senha de acesso"

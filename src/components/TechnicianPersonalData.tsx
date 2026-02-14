@@ -11,15 +11,18 @@ import {
 } from "./ui/field";
 import { Input } from "./ui/input";
 import { NewTechnicianFormData } from "@/schemas/new-technician";
+import { useTechnicianDetails } from "@/hooks/useTechnicianDetails";
 
 export function TechnicianPersonalData() {
+  const { params } = useTechnicianDetails();
+
   const {
     register,
     formState: { errors },
   } = useFormContext<NewTechnicianFormData>();
 
   return (
-    <div className="border-app-gray-500 rounded-2xl border p-5 lg:col-span-2 lg:col-start-1 lg:grid">
+    <div className="border-app-gray-500 h-fit rounded-2xl border p-5 lg:col-span-2 lg:col-start-1 lg:grid">
       <FieldSet>
         <FieldLegend className="text-app-gray-200 text-[20px] font-bold">
           Dados pessoais
@@ -39,9 +42,15 @@ export function TechnicianPersonalData() {
               id="name"
               autoComplete="off"
               {...register("name")}
+              disabled={!!params.id}
               placeholder="Nome completo"
               className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
             />
+            {errors.name && (
+              <span className="text-xs text-red-500">
+                {errors.name.message}
+              </span>
+            )}
           </Field>
           <Field>
             <FieldLabel
@@ -53,29 +62,42 @@ export function TechnicianPersonalData() {
             <Input
               id="email"
               autoComplete="off"
-              {...register("name")}
+              {...register("email")}
               placeholder="exemplo@email.com"
               className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
             />
+            {errors.email && (
+              <span className="text-xs text-red-500">
+                {errors.email.message}
+              </span>
+            )}
           </Field>
-          <Field>
-            <FieldLabel
-              htmlFor="password"
-              className="text-app-gray-300 text-sm font-bold"
-            >
-              Senha
-            </FieldLabel>
-            <Input
-              id="email"
-              autoComplete="off"
-              {...register("name")}
-              placeholder="Defina a senha de acesso"
-              className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
-            />
-            <small className="text-app-gray-400 text-xs italic">
-              Mínimo de 6 digítos
-            </small>
-          </Field>
+          {!params.id ? (
+            <Field>
+              <FieldLabel
+                htmlFor="password"
+                className="text-app-gray-300 text-sm font-bold"
+              >
+                Senha
+              </FieldLabel>
+              <Input
+                id="email"
+                autoComplete="off"
+                {...register("password")}
+                placeholder="Defina a senha de acesso"
+                className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
+              />
+              {errors.password ? (
+                <span className="text-xs text-red-500">
+                  {errors.password.message}
+                </span>
+              ) : (
+                <small className="text-app-gray-400 text-xs italic">
+                  Mínimo de 6 digítos
+                </small>
+              )}
+            </Field>
+          ) : null}
         </FieldGroup>
       </FieldSet>
     </div>

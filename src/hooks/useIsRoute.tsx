@@ -9,7 +9,7 @@ export function useIsRoute({ user }: useIsRouteProps) {
 
   const rotesToHide = [`/admin/users/${user}`];
 
-  const isClient = rotesToHide.includes(pathname);
+  const isUser = rotesToHide.includes(pathname);
 
-  return isClient;
+  return isUser;
 }

@@ -8,7 +8,9 @@ import { useIsRoute } from "@/hooks/useIsRoute";
 import { cn } from "@/lib/classMerge";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { DeleteUser } from "./DeleteUser";
+import Link from "next/link";
+import { useTechnicianDetails } from "@/hooks/useTechnicianDetails";
 
 export type Users = {
   id: string;
@@ -23,18 +25,8 @@ type UsersTableProps = {
   data: Users[];
 };
 
-const AvailabilitiesCell = () => {
-  const pathname = usePathname();
-
-  const rotesToHide = ["/admin/users/client"];
-
-  const isClient = rotesToHide.includes(pathname);
-
-  return isClient;
-};
-
 export function UsersTable({ data }: UsersTableProps) {
-  const isClient = useIsRoute({ user: "client" });
+  const isClient = useIsRoute({ user: "clients" });
 
   const columns: ColumnDef<Users>[] = [
     {
@@ -56,10 +48,13 @@ export function UsersTable({ data }: UsersTableProps) {
     {
       accessorKey: "email",
       header: () => {
-        const isClient = AvailabilitiesCell();
-
         return (
-          <p className={cn(["text-app-gray-400 hidden text-sm md:table-cell"])}>
+          <p
+            className={cn([
+              "text-app-gray-400 text-sm md:table-cell",
+              isClient ? "" : "hidden",
+            ])}
+          >
             E-mail
           </p>
         );
@@ -67,7 +62,11 @@ export function UsersTable({ data }: UsersTableProps) {
       cell: ({ row }) => {
         const email = row.original.email;
 
-        return <div className="hidden md:table-cell">{email}</div>;
+        return (
+          <div className={cn(["md:table-cell", isClient ? "" : "hidden"])}>
+            {email}
+          </div>
+        );
       },
     },
     {
@@ -80,7 +79,10 @@ export function UsersTable({ data }: UsersTableProps) {
       cell: ({ row }) => {
         const schedules = row.original.availabilities[0];
 
-        return schedules && <TimeSlotsTechnicial availabilities={schedules} />;
+        return (
+          schedules &&
+          !isClient && <TimeSlotsTechnicial availabilities={schedules} />
+        );
       },
     },
     {
@@ -89,22 +91,42 @@ export function UsersTable({ data }: UsersTableProps) {
       cell: ({ row }) => {
         return (
           <div className="flex justify-end gap-2">
-            <Button size="icon-sm" variant="ghost" className="bg-app-gray-500">
-              <Image
-                src="/icons/trash.svg"
-                alt="Ícone de lixeira"
-                width={14}
-                height={14}
-              />
-            </Button>
-            <Button size="icon-sm" variant="ghost" className="bg-app-gray-500">
-              <Image
-                src="/icons/pen-line.svg"
-                alt="Ícone de lápis"
-                width={14}
-                height={14}
-              />
-            </Button>
+            <DeleteUser userId={row.original.id} name={row.original.name} />
+            {isClient ? (
+              <Button
+                size="icon-sm"
+                variant="ghost"
+                className="bg-app-gray-500"
+                asChild
+              >
+                <Link href="/admin/users/clients">
+                  <Image
+                    src="/icons/pen-line.svg"
+                    alt="Ícone de lápis"
+                    width={14}
+                    height={14}
+                  />
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                size="icon-sm"
+                variant="ghost"
+                className="bg-app-gray-500"
+                asChild
+              >
+                <Link
+                  href={`/admin/users/technicians/technician-profile/${row.original.id}`}
+                >
+                  <Image
+                    src="/icons/pen-line.svg"
+                    alt="Ícone de lápis"
+                    width={14}
+                    height={14}
+                  />
+                </Link>
+              </Button>
+            )}
           </div>
         );
       },

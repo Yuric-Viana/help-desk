@@ -1,13 +1,13 @@
 import { usePathname } from "next/navigation";
 
 interface useIsRouteProps {
-  user: string;
+  ref: string;
 }
 
-export function useIsRoute({ user }: useIsRouteProps) {
+export function useIsRoute({ ref }: useIsRouteProps) {
   const pathname = usePathname();
 
-  const rotesToHide = [`/admin/users/${user}`];
+  const rotesToHide = [`${ref}`];
 
   const isUser = rotesToHide.includes(pathname);
 

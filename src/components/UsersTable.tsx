@@ -26,7 +26,7 @@ type UsersTableProps = {
 };
 
 export function UsersTable({ data }: UsersTableProps) {
-  const isClient = useIsRoute({ user: "clients" });
+  const isClient = useIsRoute({ ref: "/admin/users/clients" });
 
   const columns: ColumnDef<Users>[] = [
     {

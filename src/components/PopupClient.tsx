@@ -45,7 +45,10 @@ export function PopupClient({ name, userId, email }: PopupClientProps) {
             />
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-app-gray-600 p-0">
+        <DialogContent
+          className="bg-app-gray-600 mt-10 p-0"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           <DialogHeader className="border-app-gray-500 border-b px-7 py-5">
             <DialogTitle>Cliente</DialogTitle>
           </DialogHeader>

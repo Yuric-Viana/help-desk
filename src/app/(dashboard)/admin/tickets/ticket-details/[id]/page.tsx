@@ -3,7 +3,7 @@ import { BackBottom } from "@/components/BackBottom";
 import { TicketDetailsAside } from "@/components/TicketDetailsAside";
 import { TicketInfoCard } from "@/components/TicketInfoCard";
 import { TicketStatus } from "@/generated/client/enums";
-import { statusMap } from "@/utils/status";
+import { statusMap } from "@/utils/status-ticket";
 import Image from "next/image";
 
 interface TicketDetailsProps {

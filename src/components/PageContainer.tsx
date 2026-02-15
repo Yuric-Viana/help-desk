@@ -1,0 +1,41 @@
+"use client";
+
+import { ReactNode } from "react";
+import { Button } from "./ui/button";
+import { PlusIcon } from "lucide-react";
+import { useIsRoute } from "@/hooks/useIsRoute";
+import Link from "next/link";
+
+interface PageContainerProps {
+  children: ReactNode;
+  title: string;
+  id?: string;
+  actionRef?: string;
+}
+
+export function PageContainer({
+  title,
+  children,
+  actionRef,
+}: PageContainerProps) {
+  const isRouteTechnicians = useIsRoute({ ref: "/admin/users/technicians" });
+  const isRouteServices = useIsRoute({ ref: "/admin/services" });
+
+  return (
+    <div className="container mt-7 w-full space-y-6 md:px-12">
+      <div className="flex items-center justify-between">
+        <h1 className="text-brand-dark text-xl font-bold">{title}</h1>
+        {isRouteTechnicians && isRouteServices && actionRef && (
+          <Link href={actionRef}>
+            <Button>
+              <PlusIcon />
+              <p className="hidden md:block">Novo</p>
+            </Button>
+          </Link>
+        )}
+      </div>
+
+      {children}
+    </div>
+  );
+}

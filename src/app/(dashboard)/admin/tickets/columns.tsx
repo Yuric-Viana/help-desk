@@ -5,7 +5,7 @@ import { ptBR } from "date-fns/locale";
 
 import { TicketStatus } from "@/generated/client/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { statusMap } from "@/utils/status";
+import { statusMap } from "@/utils/status-ticket";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

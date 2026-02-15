@@ -1,6 +1,7 @@
 import { columns, TicketRow } from "./columns";
 import { DataTable } from "../../../../components/data-table";
 import { GetAllTickets } from "@/actions/GetAllTickets";
+import { PageContainer } from "@/components/PageContainer";
 
 export default async function TicketsPage() {
   const tickets = await GetAllTickets();
@@ -39,10 +40,8 @@ export default async function TicketsPage() {
   });
 
   return (
-    <div className="container mt-14 w-full space-y-6 px-6 md:px-12">
-      <h1 className="text-brand-dark text-xl font-bold">Chamados</h1>
-
+    <PageContainer title="Chamados">
       <DataTable columns={columns} data={formattedTickets} />
-    </div>
+    </PageContainer>
   );
 }

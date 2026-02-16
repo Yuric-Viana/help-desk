@@ -71,7 +71,7 @@ export function PopupClient({ name, userId, email }: PopupClientProps) {
                 value={name}
                 disabled={true}
                 placeholder="Nome completo"
-                className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
+                className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b-2 px-0 focus-visible:ring-0"
               />
             </Field>
             <Field>
@@ -86,7 +86,7 @@ export function PopupClient({ name, userId, email }: PopupClientProps) {
                 autoComplete="off"
                 {...register("email")}
                 placeholder="example@email.com"
-                className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b px-0 focus-visible:ring-0"
+                className="placeholder:text-md border-app-gray-500 placeholder:text-app-gray-400 rounded-none border-0 border-b-2 px-0 focus-visible:ring-0"
               />
               {errors.email && (
                 <span className="text-xs text-red-500">

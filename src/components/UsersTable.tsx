@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "@/components/DataTable";
 import { InitialsAvatar } from "@/components/InitialsAvatar";
 import { TimeSlotsTechnicial } from "@/components/TimeSlotsTechnicial";
 import { Button } from "@/components/ui/button";

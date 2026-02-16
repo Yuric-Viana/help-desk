@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { PlusIcon } from "lucide-react";
 import { useIsRoute } from "@/hooks/useIsRoute";
 import Link from "next/link";
+import { PopupService } from "./PopupService";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -25,13 +26,21 @@ export function PageContainer({
     <div className="container mt-7 w-full space-y-6 md:px-12">
       <div className="flex items-center justify-between">
         <h1 className="text-brand-dark text-xl font-bold">{title}</h1>
-        {isRouteTechnicians && isRouteServices && actionRef && (
+        {isRouteTechnicians && actionRef && (
           <Link href={actionRef}>
             <Button>
               <PlusIcon />
               <p className="hidden md:block">Novo</p>
             </Button>
           </Link>
+        )}
+        {isRouteServices && (
+          <PopupService title="Cadastro de serviço">
+            <Button>
+              <PlusIcon />
+              <p className="hidden md:block">Novo</p>
+            </Button>
+          </PopupService>
         )}
       </div>
 

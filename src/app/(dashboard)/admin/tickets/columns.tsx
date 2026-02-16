@@ -89,9 +89,9 @@ export const columns: ColumnDef<TicketRow>[] = [
   {
     accessorKey: "amount",
     header: () => (
-      <div className="text-app-gray-400 hidden text-sm md:table-cell">
+      <p className="text-app-gray-400 hidden text-sm md:table-cell">
         Valor total
-      </div>
+      </p>
     ),
     meta: { className: "hidden md:table-cell" },
     cell: ({ row }) => {

@@ -21,7 +21,7 @@ interface DeleteUserProps {
 }
 
 export function DeleteUser({ name, userId }: DeleteUserProps) {
-  const isClient = useIsRoute({ user: "clients" });
+  const isClient = useIsRoute({ ref: "/admin/users/clients" });
 
   const { deleteClient, disableTechnician } = useUserActions(userId);
 

@@ -1,5 +1,5 @@
 import { columns, TicketRow } from "./columns";
-import { DataTable } from "../../../../components/data-table";
+import { DataTable } from "../../../../components/DataTable";
 import { GetAllTickets } from "@/actions/GetAllTickets";
 import { PageContainer } from "@/components/PageContainer";
 

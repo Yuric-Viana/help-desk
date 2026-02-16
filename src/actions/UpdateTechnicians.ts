@@ -20,6 +20,10 @@ export const UpdateTechnicians = async ({
 
   if (!user) throw new Error("Usuário não encontrado");
 
+  if (!data.availabilities && !data.email) {
+    throw new Error("Informe os novos valores para serem atualizados.");
+  }
+
   await prisma.user.update({
     where: {
       id: userId,

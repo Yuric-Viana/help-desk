@@ -20,6 +20,10 @@ export const UpdateClient = async ({ userId, data }: UpdateClientProps) => {
     throw new Error("Usuário não encontrado");
   }
 
+  if (!data.email) {
+    throw new Error("Informe o novo valor para o email.");
+  }
+
   await prisma.user.update({
     where: {
       id: user.id,

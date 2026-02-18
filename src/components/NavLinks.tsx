@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/classMerge";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 interface NavLinkProps {
   onClose?: () => void;
@@ -15,11 +16,15 @@ interface NavLinkProps {
 export function NavLinks({ onClose, title }: NavLinkProps) {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
 
+  const session = useSession();
+
   const handleClick = () => {
     if (onClose) {
       onClose();
     }
   };
+
+  if (!session.data?.user.role) return null;
 
   return (
     <>
@@ -28,7 +33,7 @@ export function NavLinks({ onClose, title }: NavLinkProps) {
           {title}
         </h3>
       )}
-      {menuListByRole["admin"].map((user) => (
+      {menuListByRole[session.data.user.role].map((user) => (
         <Button
           className={cn([
             "flex items-center justify-start gap-3 p-3 text-start text-sm",

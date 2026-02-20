@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import {
   TicketStatus,
   UserRole,
@@ -6,6 +7,8 @@ import {
 import { prisma } from "@/lib/prisma";
 
 async function main() {
+  const hashedPassword = await hash("123456", 10);
+
   /* ============================
    * LIMPEZA DO BANCO (RESET)
    * ============================ */
@@ -30,7 +33,7 @@ async function main() {
       name: "Usuário Adm",
       email: "admin@test.com",
       role: UserRole.admin,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -39,7 +42,7 @@ async function main() {
       name: "Carlos Silva",
       email: "carlos.silva@test.com",
       role: UserRole.technical,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -48,7 +51,7 @@ async function main() {
       name: "Ana Oliveira",
       email: "ana.oliveira@test.com",
       role: UserRole.technical,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -57,7 +60,7 @@ async function main() {
       name: "André Costa",
       email: "andre.costa@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -66,7 +69,7 @@ async function main() {
       name: "Aline Souza",
       email: "aline.souza@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -75,7 +78,7 @@ async function main() {
       name: "Julia Maria",
       email: "julia.maria@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -84,7 +87,7 @@ async function main() {
       name: "Suzane Moura",
       email: "suzane.moura@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -98,7 +101,7 @@ async function main() {
       name: "Roberto Gerente",
       email: "roberto@test.com",
       role: UserRole.admin,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -108,7 +111,7 @@ async function main() {
       name: "Fernanda Tech",
       email: "fernanda@test.com",
       role: UserRole.technical,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -118,7 +121,7 @@ async function main() {
       name: "Ricardo Santos",
       email: "ricardo@test.com",
       role: UserRole.technical,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -128,7 +131,7 @@ async function main() {
       name: "Bruno Dias",
       email: "bruno@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -138,7 +141,7 @@ async function main() {
       name: "Carla Gomes",
       email: "carla@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -148,7 +151,7 @@ async function main() {
       name: "Daniel Rocha",
       email: "daniel@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -158,7 +161,7 @@ async function main() {
       name: "Elaine Martins",
       email: "elaine@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -168,7 +171,7 @@ async function main() {
       name: "Fabio Lima",
       email: "fabio@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -178,7 +181,7 @@ async function main() {
       name: "Gabriela Nogueira",
       email: "gabriela@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 
@@ -188,7 +191,7 @@ async function main() {
       name: "Hugo Pires",
       email: "hugo@test.com",
       role: UserRole.client,
-      password: "123456",
+      password: hashedPassword,
     },
   });
 

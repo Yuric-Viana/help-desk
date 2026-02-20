@@ -18,6 +18,8 @@ export async function proxy(request: NextRequest) {
   if (token && currentPath === "/") {
     if (userRole === "admin") {
       return NextResponse.redirect(new URL("/admin/tickets", request.url));
+    } else if (userRole === "technical") {
+      return NextResponse.redirect(new URL("/technician/tickets", request.url));
     }
   }
 

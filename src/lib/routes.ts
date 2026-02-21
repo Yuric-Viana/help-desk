@@ -1,6 +1,6 @@
 export const routePermissions = {
   "/admin": ["admin"],
-  "/technician": ["technician"],
+  "/technician": ["technical"],
   "/portal": ["client"],
 };
 

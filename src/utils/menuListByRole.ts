@@ -43,8 +43,8 @@ export const menuListByRole = {
     {
       label: "Meus chamados",
       icon: "/icons/list-default.svg",
-      iconHover: "/icons/plus-hover.svg",
-      path: "/tickets",
+      iconHover: "/icons/list-hover.svg",
+      path: "/technician/tickets",
     },
   ],
 };

@@ -14,12 +14,12 @@ export default async function DashboardLayout({
   if (!session?.user.name) return;
 
   return (
-    <div className="bg-app-gray-100 grid min-h-screen w-full grid-rows-[100px_1fr] lg:grid lg:grid-cols-[245px_1fr] lg:grid-rows-1">
+    <div className="bg-app-gray-100 grid max-h-screen w-full grid-rows-[100px_1fr] overflow-auto lg:grid lg:grid-cols-[245px_1fr] lg:grid-rows-1 lg:overflow-hidden [&::-webkit-scrollbar]:hidden">
       <div className="hidden lg:block">
         <Sidebar />
       </div>
       <MobileHeader />
-      <main className="bg-app-gray-600 min-w-0 rounded-t-2xl px-6 lg:mt-3">
+      <main className="bg-app-gray-600 flex h-full min-w-0 flex-col rounded-t-2xl px-6 lg:mt-3">
         {children}
       </main>
     </div>

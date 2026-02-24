@@ -24,7 +24,7 @@ export const GetAllTickets = async (props?: GetAllTicketsProps) => {
       },
     },
     orderBy: {
-      id: "asc",
+      status: "asc",
     },
   });
 };

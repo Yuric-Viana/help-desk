@@ -2,9 +2,9 @@ import { cn } from "@/lib/classMerge";
 import { LogOut } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import Link from "next/link";
 import { useLogout } from "@/hooks/useLogout";
 import { useProfile } from "@/hooks/useProfile";
+import { PopupProfile } from "./PopupProfile";
 
 interface ProfileOptionsProps {
   className?: string;
@@ -27,22 +27,24 @@ export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
       </h3>
 
       {!hasRole("admin") && (
-        <Button
-          variant="ghost"
-          className="flex w-max items-center gap-2 p-0"
-          onClick={onClose}
-          asChild
-        >
-          <Link href="">
-            <Image
-              src="/icons/circle-user.svg"
-              alt="Ícone de usuário"
-              width={20}
-              height={20}
-            />
-            <p className="text-app-gray-500 cursor-pointer text-base">Perfil</p>
-          </Link>
-        </Button>
+        <div>
+          {
+            <PopupProfile
+              onClick={onClose}
+              className="flex w-max items-center gap-2 p-0"
+            >
+              <Image
+                src="/icons/circle-user.svg"
+                alt="Ícone de usuário"
+                width={20}
+                height={20}
+              />
+              <p className="text-app-gray-500 cursor-pointer text-base">
+                Perfil
+              </p>
+            </PopupProfile>
+          }
+        </div>
       )}
 
       <Button

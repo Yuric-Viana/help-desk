@@ -30,6 +30,27 @@ export const UpdateTicket = async ({
     throw new Error("Serviço não encontrado");
   }
 
+  const verifyTicket = await prisma.ticket.findUnique({
+    where: {
+      id: ticketId,
+    },
+    select: {
+      ticketServices: {
+        select: {
+          serviceId: true,
+        },
+      },
+    },
+  });
+
+  const hasServiceIncludeOnTicket = verifyTicket?.ticketServices.some(
+    (ticket) => ticket.serviceId === serviceId,
+  );
+
+  if (hasServiceIncludeOnTicket) {
+    throw new Error("O serviço já está incluído no chamado.");
+  }
+
   const ticketServicesData = services.map((service) => ({
     priceSnapshot: service.price,
     serviceId: service.id,

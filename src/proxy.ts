@@ -20,6 +20,8 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/tickets", request.url));
     } else if (userRole === "technical") {
       return NextResponse.redirect(new URL("/technician/tickets", request.url));
+    } else {
+      return NextResponse.redirect(new URL("/portal/tickets", request.url));
     }
   }
 

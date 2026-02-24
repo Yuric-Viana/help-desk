@@ -232,14 +232,6 @@ async function main() {
     },
   });
 
-  const servicePeripheral = await prisma.service.create({
-    data: {
-      title: "Suporte de Software",
-      description: "Configuração de periféricos",
-      price: 80,
-    },
-  });
-
   /* ============================
    * NOVOS SERVICES (10 ITENS)
    * ============================ */
@@ -413,7 +405,7 @@ async function main() {
       technicianId: technicianAna.id,
       ticketServices: {
         create: {
-          serviceId: servicePeripheral.id,
+          serviceId: serviceNew10.id,
           priceSnapshot: 80,
         },
       },

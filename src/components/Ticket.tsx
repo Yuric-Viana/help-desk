@@ -91,13 +91,18 @@ export async function Tickets({ data }: TicketsProps) {
                     </p>
                     <p className="text-app-gray-200 text-sm">
                       <span className="text-app-gray-200 text-[10px] font-bold">
-                        R$
+                        R$ {"  "}
                       </span>
-                      {ticket.ticketServices[0].priceSnapshot
-                        .toLocaleString("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        })
+                      {Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })
+                        .format(
+                          ticket.ticketServices.reduce(
+                            (total, service) => total + service.priceSnapshot,
+                            0,
+                          ),
+                        )
                         .replace("R$", "")}
                     </p>
                   </div>

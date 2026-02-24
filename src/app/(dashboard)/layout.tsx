@@ -19,7 +19,7 @@ export default async function DashboardLayout({
         <Sidebar />
       </div>
       <MobileHeader />
-      <main className="bg-app-gray-600 flex h-full min-w-0 flex-col rounded-t-2xl px-6 lg:mt-3">
+      <main className="bg-app-gray-600 flex h-screen min-w-0 flex-col overflow-y-auto rounded-t-2xl px-6 lg:mt-3 [&::-webkit-scrollbar]:hidden">
         {children}
       </main>
     </div>

@@ -1,4 +1,4 @@
-import { columns, TicketRow } from "./columns";
+import { TicketsTable, TicketRow } from "../../../../components/TicketsColumns";
 import { DataTable } from "../../../../components/DataTable";
 import { GetAllTickets } from "@/actions/GetAllTickets";
 import { PageContainer } from "@/components/PageContainer";
@@ -41,7 +41,7 @@ export default async function TicketsPage() {
 
   return (
     <PageContainer title="Chamados">
-      <DataTable columns={columns} data={formattedTickets} />
+      <TicketsTable data={formattedTickets} />
     </PageContainer>
   );
 }

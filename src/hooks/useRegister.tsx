@@ -1,3 +1,5 @@
+"use client";
+
 import { RegisterFormData } from "@/schemas/register";
 import { api } from "@/services/api";
 import { AxiosError } from "axios";

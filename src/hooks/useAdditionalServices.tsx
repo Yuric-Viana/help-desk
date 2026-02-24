@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Service } from "../../generated/prisma/client";
 import { UpdateTicket } from "@/actions/UpdateTicket";
+import { Service } from "../../generated/prisma/client";
+import { toast } from "sonner";
 
-export interface PopupAdditionalServicesProps {
+export interface useAdditionalServicesProps {
   data: Service[];
   ticketId: number;
 }
@@ -10,14 +11,13 @@ export interface PopupAdditionalServicesProps {
 export function useAdditionalServices({
   data,
   ticketId,
-}: PopupAdditionalServicesProps) {
+}: useAdditionalServicesProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [selectedServiceId, setSelectedServiceId] = useState<string>("");
 
   const selectedServicePrice =
-    data.find((service) => service.id.toString() === selectedServiceId)
-      ?.price || 0;
+    data.find((item) => item.id.toString() === selectedServiceId)?.price || 0;
 
   const onSubmit = async () => {
     if (!selectedServiceId) {
@@ -29,9 +29,23 @@ export function useAdditionalServices({
       return;
     }
 
-    await UpdateTicket({ ticketId: ticketId, serviceId: selectedServiceId });
+    try {
+      await UpdateTicket({ ticketId: ticketId, serviceId: selectedServiceId });
 
-    setIsOpen(false);
+      setIsOpen(false);
+      setSelectedServiceId("");
+      toast.success("Serviço adicionado com sucesso!");
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error(
+          "Não foi possível adicionar um serviço. Tente novamente mais tarde.",
+        );
+      }
+    }
   };
 
   return {

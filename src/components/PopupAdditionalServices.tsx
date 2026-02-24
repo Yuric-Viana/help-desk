@@ -23,14 +23,14 @@ import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { Form } from "./Form";
 import {
-  PopupAdditionalServicesProps,
+  useAdditionalServicesProps,
   useAdditionalServices,
 } from "@/hooks/useAdditionalServices";
 
 export function PopupAdditionalServices({
   data,
   ticketId,
-}: PopupAdditionalServicesProps) {
+}: useAdditionalServicesProps) {
   const {
     isOpen,
     setIsOpen,
@@ -73,14 +73,14 @@ export function PopupAdditionalServices({
                   <SelectLabel className="text-app-gray-300 text-[10px] font-bold uppercase">
                     Serviços disponíveis
                   </SelectLabel>
-                  {data.map((service) => (
+                  {data.map((item) => (
                     <SelectItem
                       className="text-app-gray-200 cursor-pointer"
-                      key={service.id}
+                      key={item.id}
                       {...register("serviceId")}
-                      value={service.id.toString()}
+                      value={item.id}
                     >
-                      {service.title}
+                      {item.title}
                     </SelectItem>
                   ))}
                 </SelectGroup>

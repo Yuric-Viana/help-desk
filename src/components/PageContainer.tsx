@@ -24,7 +24,6 @@ export function PageContainer({
 }: PageContainerProps) {
   const isRouteTechnicians = useIsRoute({ ref: "/admin/users/technicians" });
   const isRouteServices = useIsRoute({ ref: "/admin/services" });
-  const isRouteTickets = useIsRoute({ ref: "/technician/tickets" });
 
   return (
     <div

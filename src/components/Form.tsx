@@ -10,9 +10,16 @@ type FormProps = React.ComponentProps<"form"> & {
   title?: string;
   description?: string;
   children: ReactNode;
+  className?: string;
 };
 
-export function Form({ title, children, description, ...rest }: FormProps) {
+export function Form({
+  title,
+  children,
+  description,
+  className,
+  ...rest
+}: FormProps) {
   return (
     <form {...rest}>
       <FieldSet>
@@ -26,7 +33,7 @@ export function Form({ title, children, description, ...rest }: FormProps) {
             {description}
           </FieldDescription>
         )}
-        <FieldGroup>{children}</FieldGroup>
+        <FieldGroup className={className}>{children}</FieldGroup>
       </FieldSet>
     </form>
   );

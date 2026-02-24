@@ -63,36 +63,37 @@ export async function TicketDetailsAside({
         </p>
       </div>
 
-      {ticket.ticketServices.length > 1 && session.user.role === "admin" && (
-        <>
-          <small className="text-app-gray-400 text-xs font-bold">
-            Adicionais
-          </small>
-          <div>
-            {ticket.ticketServices.map((additional, index) => {
-              if (index === 0) return null;
-              return (
-                <div
-                  key={additional.id}
-                  className="flex items-center justify-between"
-                >
-                  <p className="text-app-gray-200 text-xs">
-                    {additional.service.title}
-                  </p>
-                  <p className="text-app-gray-200 text-xs">
-                    {Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(additional.priceSnapshot)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+      {ticket.ticketServices.length > 2 &&
+        (session.user.role === "admin" || session.user.role === "client") && (
+          <>
+            <small className="text-app-gray-400 text-xs font-bold">
+              Adicionais
+            </small>
+            <div>
+              {ticket.ticketServices.map((additional, index) => {
+                if (index === 0) return null;
+                return (
+                  <div
+                    key={additional.id}
+                    className="flex items-center justify-between"
+                  >
+                    <p className="text-app-gray-200 text-xs">
+                      {additional.service.title}
+                    </p>
+                    <p className="text-app-gray-200 text-xs">
+                      {Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(additional.priceSnapshot)}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
 
-      {ticket.ticketServices.length > 1 &&
+      {ticket.ticketServices.length > 2 &&
         session.user.role === "technical" && (
           <div className="flex items-center justify-between">
             <p className="text-app-gray-200 text-xs">Adicionais</p>

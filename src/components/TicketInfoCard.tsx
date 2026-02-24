@@ -1,3 +1,5 @@
+"use client";
+
 import { Prisma } from "@/generated/client/client";
 import { cn } from "@/lib/classMerge";
 import { statusMap } from "@/utils/status-ticket";
@@ -5,6 +7,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Image from "next/image";
 import { InitialsAvatar } from "./InitialsAvatar";
+import { useSession } from "next-auth/react";
 
 interface TicketInfoCardProps {
   data: Prisma.TicketGetPayload<{
@@ -32,6 +35,8 @@ interface TicketInfoCardProps {
 }
 
 export function TicketInfoCard({ data, className }: TicketInfoCardProps) {
+  const { data: session } = useSession();
+
   const statusValue = statusMap[data.status];
 
   const createdAt = format(data.createdAt, "dd/MM/yy HH:mm", {
@@ -99,20 +104,22 @@ export function TicketInfoCard({ data, className }: TicketInfoCardProps) {
         </div>
       </div>
 
-      <div>
-        <small className="text-app-gray-400 text-xs font-bold">Cliente</small>
-        <div className="text-app-gray-600 mt-2 flex items-center gap-2">
-          <div className="bg-brand-dark flex h-5 w-5 items-center justify-center rounded-full">
-            {
-              <InitialsAvatar
-                className="text-[8.75px]"
-                name={data.client.name}
-              />
-            }{" "}
+      {session?.user.role !== "client" && (
+        <div>
+          <small className="text-app-gray-400 text-xs font-bold">Cliente</small>
+          <div className="text-app-gray-600 mt-2 flex items-center gap-2">
+            <div className="bg-brand-dark flex h-5 w-5 items-center justify-center rounded-full">
+              {
+                <InitialsAvatar
+                  className="text-[8.75px]"
+                  name={data.client.name}
+                />
+              }{" "}
+            </div>
+            <h3 className="text-app-gray-200 text-sm">{data.client.name}</h3>
           </div>
-          <h3 className="text-app-gray-200 text-sm">{data.client.name}</h3>
         </div>
-      </div>
+      )}
     </div>
   );
 }

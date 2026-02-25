@@ -7,7 +7,7 @@ interface GetTicketsParams {
 }
 
 export const GetTicketUnique = async ({ ticketId }: GetTicketsParams) => {
-  return await prisma.ticket.findUnique({
+  const ticket = await prisma.ticket.findUnique({
     where: {
       id: ticketId,
     },
@@ -21,4 +21,8 @@ export const GetTicketUnique = async ({ ticketId }: GetTicketsParams) => {
       technician: true,
     },
   });
+
+  if (!ticket) throw new Error("Chamado não encontrado.");
+
+  return ticket;
 };

@@ -4,11 +4,15 @@ import { prisma } from "@/lib/prisma";
 import { TicketStatus } from "../../generated/prisma/enums";
 import { revalidatePath } from "next/cache";
 
-interface UpdateStatusTicket {
+export interface UpdateStatusTicket {
   ticketId: number;
+  ticketStatus: TicketStatus;
 }
 
-export const UpdateStatusTicket = async ({ ticketId }: UpdateStatusTicket) => {
+export const UpdateStatusTicket = async ({
+  ticketId,
+  ticketStatus,
+}: UpdateStatusTicket) => {
   const ticket = await prisma.ticket.findUnique({
     where: {
       id: ticketId,
@@ -25,11 +29,8 @@ export const UpdateStatusTicket = async ({ ticketId }: UpdateStatusTicket) => {
       id: ticketId,
     },
     data: {
-      status:
-        ticket.status === TicketStatus.open ||
-        ticket.status === TicketStatus.inAttendance
-          ? TicketStatus.closed
-          : TicketStatus.open,
+      status: ticketStatus,
+      updatedAt: new Date(),
     },
   });
 

@@ -1,9 +1,17 @@
 import { PageContainer } from "@/components/PageContainer";
 import { TicketsTable, TicketRow } from "../../../../components/TicketsColumns";
 import { GetAllTickets } from "@/actions/GetAllTickets";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export default async function ClientPage() {
-  const tickets = await GetAllTickets();
+  const session = await getServerSession(authOptions);
+
+  if (!session) return null;
+
+  const clientId = session.user.id;
+
+  const tickets = await GetAllTickets({ clientId });
 
   const formattedTickets: TicketRow[] = tickets.map((ticket) => {
     const totalAmount = ticket.ticketServices.reduce((acc, item) => {

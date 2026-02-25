@@ -70,8 +70,8 @@ O sistema possui controle rígido de rotas e ações dependendo do papel do usu�
 3. **Configuração de Variáveis de Ambiente:**
    Crie um arquivo `.env` na raiz do projeto e preencha com as suas credenciais:
    
-   ```text
-Banco de Dados e NextAuth
+   ```bash
+   Banco de Dados e NextAuth
    DATABASE_URL="postgresql://usuario:senha@localhost:5432/help_desk?schema=public"
    NEXTAUTH_SECRET="sua-chave-secreta-jwt"
    NEXTAUTH_URL="http://localhost:3000"

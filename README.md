@@ -88,20 +88,23 @@ O sistema possui controle rígido de rotas e ações dependendo do papel do usu�
 
 4. **Gere o cliente do Prisma e rode as migrations:**
 
- - npx prisma generate
- - npx prisma migrate dev
+   ```bash
+    npx prisma generate
+    npx prisma migrate dev
  
 5. Popule o banco de dados (Seed):
 (Este comando insere o usuário Admin, os 3 Técnicos com seus turnos específicos e os 5 Serviços iniciais exigidos pelo projeto).
 
- - npx prisma db seed
+   ```bash
+    npx prisma db seed
 
 6. Inicie o servidor de desenvolvimento:
 
- - npm run dev
- - Acesse a aplicação em http://localhost:3000.
+   ```bash
+      npm run dev
+       Acesse a aplicação em http://localhost:3000.
 
 🔗 Links Úteis
-Deploy da Aplicação: [Insira o link da Vercel aqui]
+Deploy da Aplicação: https://help-desk-wine.vercel.app/
 
 Desenvolvido com 🩵 por Yuri.

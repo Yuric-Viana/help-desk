@@ -57,10 +57,14 @@ export const authOptions: AuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, trigger, session }) => {
       if (user) {
         token.id = user.id;
         token.role = user.role;
+      }
+
+      if (trigger === "update" && typeof session?.image !== "undefined") {
+        token.picture = session.image;
       }
 
       return token;
@@ -69,6 +73,7 @@ export const authOptions: AuthOptions = {
       if (token) {
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.image = token.picture as string | null | undefined;
       }
 
       return session;

@@ -3,6 +3,8 @@
 import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 import { InitialsAvatar } from "./InitialsAvatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useUserImage } from "@/hooks/useUserImage";
 
 interface AppFooterProps {
   onClick?: () => void;
@@ -10,6 +12,7 @@ interface AppFooterProps {
 
 export function AppFooter({ onClick }: AppFooterProps) {
   const { data } = useSession();
+  const { avatarUrl } = useUserImage();
 
   if (!data?.user.name) return;
 
@@ -21,7 +24,14 @@ export function AppFooter({ onClick }: AppFooterProps) {
         onClick={onClick}
         className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
       >
-        {<InitialsAvatar name={data.user.name} />}
+        <Avatar>
+          <AvatarImage src={avatarUrl || ""} width={48} height={48} />
+          <AvatarFallback className="bg-app-gray-500 text-app-gray-200 font-bold">
+            <div className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full">
+              <InitialsAvatar name={data.user.name} />
+            </div>
+          </AvatarFallback>
+        </Avatar>
       </Button>
 
       <div>

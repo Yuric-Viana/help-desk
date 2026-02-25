@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Button } from "./ui/button";
 import {
@@ -11,12 +9,13 @@ import {
 } from "./ui/dialog";
 import { Form } from "./Form";
 import { Field, FieldGroup, FieldLabel } from "./ui/field";
-import { Avatar } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Input } from "./ui/input";
-import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
 import { useTechnicianAvailabilities } from "@/hooks/useTechnicianAvailabilities";
+import { useUserImage } from "@/hooks/useUserImage";
+import { InitialsAvatar } from "./InitialsAvatar";
 
 type PopupProfileProps = React.ComponentProps<"button"> & {
   children: ReactNode;
@@ -28,7 +27,8 @@ export function PopupProfile({
   className,
   ...rest
 }: PopupProfileProps) {
-  const { data: session } = useSession();
+  const { avatarUrl, handleUploadChange, session, handleDeleteImage } =
+    useUserImage();
 
   const isTechnical = session?.user.role === "technical";
 
@@ -43,11 +43,7 @@ export function PopupProfile({
       <DialogTrigger className={className} {...rest}>
         {children}
       </DialogTrigger>
-      <DialogContent
-        className="bg-app-gray-600 border-0 p-0"
-        onClick={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-      >
+      <DialogContent className="bg-app-gray-600 border-0 p-0">
         <DialogHeader className="border-app-gray-500 border-b-2 px-7 py-5">
           <DialogTitle className="text-app-gray-200 font-bold">
             Perfil
@@ -58,7 +54,12 @@ export function PopupProfile({
             <Field>
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src="/google.svg" width={48} height={48} />
+                  <AvatarImage src={avatarUrl || ""} width={48} height={48} />
+                  <AvatarFallback className="bg-app-gray-500 text-app-gray-200 font-bold">
+                    <div className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full">
+                      <InitialsAvatar name={session.user.name} />
+                    </div>
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex items-center gap-1">
                   <div className="relative">
@@ -77,12 +78,17 @@ export function PopupProfile({
                     />
                     <Input
                       id="upload"
+                      onChange={handleUploadChange}
                       type="file"
                       placeholder="Nova imagem"
                       className="hidden"
                     />
                   </div>
-                  <Button variant="outline" size="icon">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handleDeleteImage}
+                  >
                     <Image
                       src="/icons/trash.svg"
                       width={16}

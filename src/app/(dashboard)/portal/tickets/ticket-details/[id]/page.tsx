@@ -1,6 +1,6 @@
 import { TicketDetails } from "@/components/TicketDetails";
 
-interface TicketDetailsProps {
+export interface TicketDetailsProps {
   params: Promise<{ id: string }>;
 }
 

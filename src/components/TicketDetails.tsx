@@ -2,22 +2,24 @@ import { GetTicketUnique } from "@/actions/GetTicketUnique";
 import { BackBottom } from "@/components/BackBottom";
 import { TicketDetailsAside } from "@/components/TicketDetailsAside";
 import { TicketInfoCard } from "@/components/TicketInfoCard";
-import { TicketStatus } from "@/generated/client/enums";
 import { authOptions } from "@/lib/auth";
-import { statusMap } from "@/utils/status-ticket";
 import { getServerSession } from "next-auth";
-import Image from "next/image";
+import { ReactNode } from "react";
+import { AttendanceActions } from "./AttendanceActions";
 
 interface TicketDetailsProps {
   params: Promise<{ id: string }>;
+  children?: ReactNode;
 }
 
-export async function TicketDetails({ params }: TicketDetailsProps) {
+export async function TicketDetails({ params, children }: TicketDetailsProps) {
   const { id } = await params;
 
   const ticketId = Number(id);
 
   const session = await getServerSession(authOptions);
+
+  if (!session) return null;
 
   if (isNaN(ticketId)) {
     return <div>ID inválido</div>;
@@ -26,12 +28,6 @@ export async function TicketDetails({ params }: TicketDetailsProps) {
   const ticket = await GetTicketUnique({ ticketId });
 
   if (!ticket) return;
-
-  const currentStatusKey = ticket.status as TicketStatus;
-
-  const availableStatuses = (Object.keys(statusMap) as TicketStatus[]).filter(
-    (status) => status !== currentStatusKey,
-  );
 
   return (
     <div className="mx-6 h-full space-y-6 pb-6 min-[1024px]:px-16 min-[1400px]:px-46 md:pt-13">
@@ -43,31 +39,13 @@ export async function TicketDetails({ params }: TicketDetailsProps) {
           </h1>
         </div>
         {session?.user.role !== "client" && (
-          <div className="flex gap-2">
-            {availableStatuses.map((statusKey) => {
-              const config = statusMap[statusKey];
-
-              return (
-                <div
-                  key={statusKey}
-                  className="bg-app-gray-500 flex w-max items-center justify-center gap-2 rounded-lg px-5 py-2.5"
-                >
-                  <Image
-                    src={config.iconTicket}
-                    alt={config.title}
-                    width={18}
-                    height={18}
-                  />
-                  <p className="text-sm font-bold">{config.title}</p>
-                </div>
-              );
-            })}
-          </div>
+          <AttendanceActions ticket={ticket} ticketId={ticketId} />
         )}
       </div>
       <div className="space-y-4 lg:grid lg:grid-cols-5 lg:gap-6">
         <TicketInfoCard data={ticket} />
         <TicketDetailsAside ticketId={ticketId} />
+        {children}
       </div>
     </div>
   );

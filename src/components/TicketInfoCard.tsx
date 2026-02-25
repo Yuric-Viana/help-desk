@@ -9,7 +9,7 @@ import Image from "next/image";
 import { InitialsAvatar } from "./InitialsAvatar";
 import { useSession } from "next-auth/react";
 
-interface TicketInfoCardProps {
+export interface TicketInfoCardProps {
   data: Prisma.TicketGetPayload<{
     select: {
       id: true;

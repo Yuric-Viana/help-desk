@@ -30,11 +30,11 @@ export const menuListByRole = {
       label: "Meus chamados",
       icon: "/icons/list-default.svg",
       iconHover: "/icons/list-hover.svg",
-      path: "/tickets",
+      path: "/portal/tickets",
     },
     {
       label: "Criar chamado",
-      path: "/",
+      path: "/portal/new-ticket",
       icon: "/icons/plus-default.svg",
       iconHover: "/icons/plus-hover.svg",
     },

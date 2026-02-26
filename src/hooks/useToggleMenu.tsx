@@ -25,18 +25,31 @@ export function useToggleMenu(ref?: RefObject<HTMLElement | null>) {
   }
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (!ref?.current || ref.current?.contains(event.target as Node)) {
+    function handleClickOutside(event: MouseEvent | TouchEvent) {
+      const target = event.target as HTMLElement;
+
+      if (ref?.current && ref.current.contains(target)) {
         return;
       }
+
+      if (
+        target.closest('[role="dialog"]') ||
+        target.closest("[data-radix-portal]") ||
+        target.closest('[data-state="open"]')
+      ) {
+        return;
+      }
+
       setClickMenu(false);
       setClickProfile(false);
     }
 
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [ref]);
 

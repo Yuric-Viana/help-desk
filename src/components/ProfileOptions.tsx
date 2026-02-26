@@ -18,7 +18,7 @@ export function ProfileOptions({ className, onClose }: ProfileOptionsProps) {
   return (
     <div
       className={cn([
-        "bg-app-gray-100 relative z-50 mx-3 space-y-4 rounded-2xl px-5 py-4",
+        "bg-app-gray-100 mx-3 space-y-4 rounded-2xl px-5 py-4",
         className,
       ])}
     >

@@ -70,38 +70,41 @@ O sistema possui controle rígido de rotas e ações dependendo do papel do usu�
 3. **Configuração de Variáveis de Ambiente:**
    Crie um arquivo `.env` na raiz do projeto e preencha com as suas credenciais:
    
-   ```text
-# Banco de Dados e NextAuth
+   ```bash
+   Banco de Dados e NextAuth
    DATABASE_URL="postgresql://usuario:senha@localhost:5432/help_desk?schema=public"
    NEXTAUTH_SECRET="sua-chave-secreta-jwt"
    NEXTAUTH_URL="http://localhost:3000"
 
-   # Provedores de Autenticação OAuth
+   Provedores de Autenticação OAuth
    GOOGLE_CLIENT_ID="seu-google-client-id"
    GOOGLE_CLIENT_SECRET="seu-google-client-secret"
    GITHUB_ID="seu-github-id"
    GITHUB_SECRET="seu-github-secret"
 
-   # Configuração de E-mail (SMTP)
+   Configuração de E-mail (SMTP)
    EMAIL_SERVER="smtp://usuario:senha@host:porta"
    EMAIL_FROM="noreply@seudominio.com"
 
 4. **Gere o cliente do Prisma e rode as migrations:**
 
- - npx prisma generate
- - npx prisma migrate dev
+   ```bash
+    npx prisma generate
+    npx prisma migrate dev
  
 5. Popule o banco de dados (Seed):
 (Este comando insere o usuário Admin, os 3 Técnicos com seus turnos específicos e os 5 Serviços iniciais exigidos pelo projeto).
 
- - npx prisma db seed
+   ```bash
+    npx prisma db seed
 
 6. Inicie o servidor de desenvolvimento:
 
- - npm run dev
- - Acesse a aplicação em http://localhost:3000.
+   ```bash
+      npm run dev
+       Acesse a aplicação em http://localhost:3000.
 
 🔗 Links Úteis
-Deploy da Aplicação: [Insira o link da Vercel aqui]
+Deploy da Aplicação: https://help-desk-wine.vercel.app/
 
 Desenvolvido com 🩵 por Yuri.

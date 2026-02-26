@@ -30,7 +30,7 @@ export async function TicketDetails({ params, children }: TicketDetailsProps) {
   if (!ticket) return;
 
   return (
-    <div className="mx-6 h-full space-y-6 pb-6 min-[1024px]:px-16 min-[1400px]:px-46 md:pt-13">
+    <div className="mx-6 h-full space-y-6 pb-18 min-[1024px]:px-16 min-[1400px]:px-46 md:pt-13">
       <div className="grid justify-between gap-3 md:flex md:items-end">
         <div className="mt-7 md:mt-0">
           <BackBottom className="has-[>svg]:px-0" />

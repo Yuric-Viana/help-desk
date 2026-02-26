@@ -13,7 +13,6 @@ export function useAdditionalServices({
   ticketId,
 }: useAdditionalServicesProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   const [selectedServiceId, setSelectedServiceId] = useState<string>("");
 
   const selectedServicePrice =
@@ -21,30 +20,30 @@ export function useAdditionalServices({
 
   const onSubmit = async () => {
     if (!selectedServiceId) {
-      console.error("Nenhum serviço selecionado!");
+      toast.error("Nenhum serviço selecionado!");
       return;
     }
 
-    if (!ticketId) {
-      return;
-    }
+    if (!ticketId) return;
 
     try {
-      await UpdateTicket({ ticketId: ticketId, serviceId: selectedServiceId });
+      const response = await UpdateTicket({
+        ticketId: ticketId,
+        serviceId: selectedServiceId,
+      });
+
+      if (!response.success) {
+        toast.error(response.message);
+        return;
+      }
 
       setIsOpen(false);
       setSelectedServiceId("");
-      toast.success("Serviço adicionado com sucesso!");
     } catch (error) {
-      console.log(error);
-
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error(
-          "Não foi possível adicionar um serviço. Tente novamente mais tarde.",
-        );
-      }
+      console.error(error);
+      toast.error(
+        "Não foi possível adicionar um serviço devido a um erro de conexão.",
+      );
     }
   };
 

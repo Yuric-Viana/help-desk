@@ -12,63 +12,61 @@ export const UpdateTicket = async ({
   ticketId,
   serviceId,
 }: UpdateTicketProps) => {
-  if (!serviceId) {
-    throw new Error("Nenhum serviço selecionado");
-  }
+  try {
+    if (!serviceId) {
+      return { success: false, message: "Nenhum serviço selecionado" };
+    }
 
-  const services = await prisma.service.findMany({
-    where: {
-      id: serviceId,
-    },
-    select: {
-      id: true,
-      price: true,
-    },
-  });
+    const services = await prisma.service.findMany({
+      where: { id: serviceId },
+      select: { id: true, price: true },
+    });
 
-  if (!services) {
-    throw new Error("Serviço não encontrado");
-  }
+    if (!services || services.length === 0) {
+      return { success: false, message: "Serviço não encontrado" };
+    }
 
-  const verifyTicket = await prisma.ticket.findUnique({
-    where: {
-      id: ticketId,
-    },
-    select: {
-      ticketServices: {
-        select: {
-          serviceId: true,
-        },
+    const verifyTicket = await prisma.ticket.findUnique({
+      where: { id: ticketId },
+      select: {
+        ticketServices: { select: { serviceId: true } },
       },
-    },
-  });
+    });
 
-  const hasServiceIncludeOnTicket = verifyTicket?.ticketServices.some(
-    (ticket) => ticket.serviceId === serviceId,
-  );
+    const hasServiceIncludeOnTicket = verifyTicket?.ticketServices.some(
+      (ticket) => ticket.serviceId === serviceId,
+    );
 
-  if (hasServiceIncludeOnTicket) {
-    throw new Error("O serviço já está incluído no chamado.");
-  }
+    if (hasServiceIncludeOnTicket) {
+      return {
+        success: false,
+        message: "O serviço já está incluído no chamado.",
+      };
+    }
 
-  const ticketServicesData = services.map((service) => ({
-    priceSnapshot: service.price,
-    serviceId: service.id,
-  }));
+    const ticketServicesData = services.map((service) => ({
+      priceSnapshot: service.price,
+      serviceId: service.id,
+    }));
 
-  await prisma.ticket.update({
-    where: {
-      id: ticketId,
-    },
-    data: {
-      ticketServices: {
-        createMany: {
-          data: ticketServicesData,
+    await prisma.ticket.update({
+      where: { id: ticketId },
+      data: {
+        ticketServices: {
+          createMany: { data: ticketServicesData },
         },
+        updatedAt: new Date(),
       },
-      updatedAt: new Date(),
-    },
-  });
+    });
 
-  revalidatePath(`/technician/tickets/${ticketId}`);
+    revalidatePath(`/technician/tickets/${ticketId}`);
+
+    return { success: true, message: "Serviço adicionado com sucesso!" };
+  } catch (error) {
+    console.error("Erro interno no UpdateTicket:", error);
+    return {
+      success: false,
+      message: "Erro interno no servidor. Tente novamente.",
+    };
+  }
 };

@@ -16,6 +16,7 @@ import { ReactNode } from "react";
 import { useTechnicianAvailabilities } from "@/hooks/useTechnicianAvailabilities";
 import { useUserImage } from "@/hooks/useUserImage";
 import { InitialsAvatar } from "./InitialsAvatar";
+import { PopupChangePassword } from "./PopupChangePassword";
 
 type PopupProfileProps = React.ComponentProps<"button"> & {
   children: ReactNode;
@@ -143,13 +144,7 @@ export function PopupProfile({
                   className="placeholder:text-md placeholder:text-app-gray-200 border-app-gray-500 rounded-none border-0 border-b-2 pl-6 shadow-md focus-visible:ring-0"
                 />
                 <div className="absolute top-0 right-0 flex items-center gap-2">
-                  <Button type="button" variant="ghost"></Button>
-                  <Button
-                    variant="ghost"
-                    className="text-app-gray-200 px-2 py-1.5 text-xs font-bold"
-                  >
-                    Alterar
-                  </Button>
+                  <PopupChangePassword userId={session.user.id} />
                 </div>
               </div>
             </Field>

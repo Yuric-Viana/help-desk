@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { InitialsAvatar } from "./InitialsAvatar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useUserImage } from "@/hooks/useUserImage";
+import { cn } from "@/lib/classMerge";
 
 interface AppFooterProps {
   onClick?: () => void;
@@ -22,7 +23,10 @@ export function AppFooter({ onClick }: AppFooterProps) {
         type="button"
         variant="ghost"
         onClick={onClick}
-        className="bg-brand-dark hover:bg-brand-base flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+        className={cn([
+          "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full",
+          !avatarUrl && "bg-brand-dark",
+        ])}
       >
         <Avatar>
           <AvatarImage src={avatarUrl || ""} width={48} height={48} />

@@ -45,7 +45,7 @@ export function TicketsTable({ data }: TicketRowData) {
 
   const isRef = isRoute
     ? "/portal/tickets/ticket-details/"
-    : "/tickets/ticket-details/";
+    : "/admin/tickets/ticket-details/";
   const isIcon = isRoute ? "/icons/eye.svg" : "/icons/pen-line.svg";
 
   const columns: ColumnDef<TicketRow>[] = [
